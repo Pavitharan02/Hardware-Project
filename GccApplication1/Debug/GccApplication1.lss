@@ -1,0 +1,869 @@
+
+GccApplication1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000514  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000008e  00800060  00000514  00000588  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000616  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000648  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000070  00000000  00000000  00000684  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000013a1  00000000  00000000  000006f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000006ee  00000000  00000000  00001a95  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000006e7  00000000  00000000  00002183  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000f4  00000000  00000000  0000286c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000369  00000000  00000000  00002960  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000c7f  00000000  00000000  00002cc9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000078  00000000  00000000  00003948  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e4 e1       	ldi	r30, 0x14	; 20
+  68:	f5 e0       	ldi	r31, 0x05	; 5
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	ae 3e       	cpi	r26, 0xEE	; 238
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 84 02 	call	0x508	; 0x508 <main>
+  7a:	0c 94 88 02 	jmp	0x510	; 0x510 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <uart_init>:
+	{
+		tx_data(*str);
+		str++;
+		_delay_ms(100);
+	}
+  82:	86 e8       	ldi	r24, 0x86	; 134
+  84:	80 bd       	out	0x20, r24	; 32
+  86:	88 e1       	ldi	r24, 0x18	; 24
+  88:	8a b9       	out	0x0a, r24	; 10
+  8a:	8d e4       	ldi	r24, 0x4D	; 77
+  8c:	89 b9       	out	0x09, r24	; 9
+  8e:	08 95       	ret
+
+00000090 <rx_data>:
+  90:	5f 9b       	sbis	0x0b, 7	; 11
+  92:	fe cf       	rjmp	.-4      	; 0x90 <rx_data>
+  94:	1b b8       	out	0x0b, r1	; 11
+  96:	8c b1       	in	r24, 0x0c	; 12
+  98:	08 95       	ret
+
+0000009a <LCD_cmd>:
+#define rw PD6 // read/write signal is connected to port D pin 6
+#define rs PD5 // register select signal is connected to port D pin 5
+//**************sending command on LCD***************//
+void LCD_cmd(unsigned char cmd)
+{
+	LCD_DATA = cmd; // data lines are set to send command*
+  9a:	88 bb       	out	0x18, r24	; 24
+	PORTD &= ~(1<<rs); // RS sets 0
+  9c:	82 b3       	in	r24, 0x12	; 18
+  9e:	8f 7d       	andi	r24, 0xDF	; 223
+  a0:	82 bb       	out	0x12, r24	; 18
+	PORTD &= ~(1<<rw); // RW sets 0
+  a2:	82 b3       	in	r24, 0x12	; 18
+  a4:	8f 7b       	andi	r24, 0xBF	; 191
+  a6:	82 bb       	out	0x12, r24	; 18
+	PORTD |= (1<<en); // make enable from high to low
+  a8:	82 b3       	in	r24, 0x12	; 18
+  aa:	80 68       	ori	r24, 0x80	; 128
+  ac:	82 bb       	out	0x12, r24	; 18
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  ae:	8f e3       	ldi	r24, 0x3F	; 63
+  b0:	9c e9       	ldi	r25, 0x9C	; 156
+  b2:	01 97       	sbiw	r24, 0x01	; 1
+  b4:	f1 f7       	brne	.-4      	; 0xb2 <LCD_cmd+0x18>
+  b6:	00 c0       	rjmp	.+0      	; 0xb8 <LCD_cmd+0x1e>
+  b8:	00 00       	nop
+	_delay_ms(10);
+	PORTD &= ~(1<<en);
+  ba:	82 b3       	in	r24, 0x12	; 18
+  bc:	8f 77       	andi	r24, 0x7F	; 127
+  be:	82 bb       	out	0x12, r24	; 18
+  c0:	08 95       	ret
+
+000000c2 <LCD_write>:
+	return;
+}
+//*****************write data on LCD*****************//
+void LCD_write(unsigned char data)
+{
+	LCD_DATA= data; // data lines are set to send command
+  c2:	88 bb       	out	0x18, r24	; 24
+	PORTD |= (1<<rs); // RS sets 1
+  c4:	82 b3       	in	r24, 0x12	; 18
+  c6:	80 62       	ori	r24, 0x20	; 32
+  c8:	82 bb       	out	0x12, r24	; 18
+	PORTD &= ~(1<<rw); // RW sets 0
+  ca:	82 b3       	in	r24, 0x12	; 18
+  cc:	8f 7b       	andi	r24, 0xBF	; 191
+  ce:	82 bb       	out	0x12, r24	; 18
+	PORTD |= (1<<en); // make enable from high to low
+  d0:	82 b3       	in	r24, 0x12	; 18
+  d2:	80 68       	ori	r24, 0x80	; 128
+  d4:	82 bb       	out	0x12, r24	; 18
+  d6:	8f e3       	ldi	r24, 0x3F	; 63
+  d8:	9c e9       	ldi	r25, 0x9C	; 156
+  da:	01 97       	sbiw	r24, 0x01	; 1
+  dc:	f1 f7       	brne	.-4      	; 0xda <LCD_write+0x18>
+  de:	00 c0       	rjmp	.+0      	; 0xe0 <LCD_write+0x1e>
+  e0:	00 00       	nop
+	_delay_ms(10);
+	PORTD &= ~(1<<en);
+  e2:	82 b3       	in	r24, 0x12	; 18
+  e4:	8f 77       	andi	r24, 0x7F	; 127
+  e6:	82 bb       	out	0x12, r24	; 18
+  e8:	08 95       	ret
+
+000000ea <init_LCD>:
+	return ;
+}
+void init_LCD(void)
+{
+	LCD_cmd(0x38); // initialization in 8bit mode of 16X2 LCD
+  ea:	88 e3       	ldi	r24, 0x38	; 56
+  ec:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+  f0:	8f e9       	ldi	r24, 0x9F	; 159
+  f2:	9f e0       	ldi	r25, 0x0F	; 15
+  f4:	01 97       	sbiw	r24, 0x01	; 1
+  f6:	f1 f7       	brne	.-4      	; 0xf4 <init_LCD+0xa>
+  f8:	00 c0       	rjmp	.+0      	; 0xfa <init_LCD+0x10>
+  fa:	00 00       	nop
+	_delay_ms(1);
+	LCD_cmd(0x01); // make clear LCD
+  fc:	81 e0       	ldi	r24, 0x01	; 1
+  fe:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 102:	8f e9       	ldi	r24, 0x9F	; 159
+ 104:	9f e0       	ldi	r25, 0x0F	; 15
+ 106:	01 97       	sbiw	r24, 0x01	; 1
+ 108:	f1 f7       	brne	.-4      	; 0x106 <init_LCD+0x1c>
+ 10a:	00 c0       	rjmp	.+0      	; 0x10c <init_LCD+0x22>
+ 10c:	00 00       	nop
+	_delay_ms(1);
+	LCD_cmd(0x02); // return home
+ 10e:	82 e0       	ldi	r24, 0x02	; 2
+ 110:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 114:	8f e9       	ldi	r24, 0x9F	; 159
+ 116:	9f e0       	ldi	r25, 0x0F	; 15
+ 118:	01 97       	sbiw	r24, 0x01	; 1
+ 11a:	f1 f7       	brne	.-4      	; 0x118 <init_LCD+0x2e>
+ 11c:	00 c0       	rjmp	.+0      	; 0x11e <init_LCD+0x34>
+ 11e:	00 00       	nop
+	_delay_ms(1);
+	LCD_cmd(0x06); // make increment in cursor
+ 120:	86 e0       	ldi	r24, 0x06	; 6
+ 122:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 126:	8f e9       	ldi	r24, 0x9F	; 159
+ 128:	9f e0       	ldi	r25, 0x0F	; 15
+ 12a:	01 97       	sbiw	r24, 0x01	; 1
+ 12c:	f1 f7       	brne	.-4      	; 0x12a <init_LCD+0x40>
+ 12e:	00 c0       	rjmp	.+0      	; 0x130 <init_LCD+0x46>
+ 130:	00 00       	nop
+	_delay_ms(1);
+	LCD_cmd(0x80); // “8” go to first line and “0” is for 0th position
+ 132:	80 e8       	ldi	r24, 0x80	; 128
+ 134:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 138:	8f e9       	ldi	r24, 0x9F	; 159
+ 13a:	9f e0       	ldi	r25, 0x0F	; 15
+ 13c:	01 97       	sbiw	r24, 0x01	; 1
+ 13e:	f1 f7       	brne	.-4      	; 0x13c <init_LCD+0x52>
+ 140:	00 c0       	rjmp	.+0      	; 0x142 <init_LCD+0x58>
+ 142:	00 00       	nop
+ 144:	08 95       	ret
+
+00000146 <LCD_Write_String>:
+	_delay_ms(1);
+	return;
+}
+//*write STRING on LCD*//
+void LCD_Write_String(char *a)
+{
+ 146:	0f 93       	push	r16
+ 148:	1f 93       	push	r17
+ 14a:	cf 93       	push	r28
+ 14c:	df 93       	push	r29
+ 14e:	8c 01       	movw	r16, r24
+	int i;
+	for(i=0;a[i]!='\0';i++)
+ 150:	c0 e0       	ldi	r28, 0x00	; 0
+ 152:	d0 e0       	ldi	r29, 0x00	; 0
+ 154:	03 c0       	rjmp	.+6      	; 0x15c <LCD_Write_String+0x16>
+	{
+		char big = a[i];
+		LCD_write(big);
+ 156:	0e 94 61 00 	call	0xc2	; 0xc2 <LCD_write>
+}
+//*write STRING on LCD*//
+void LCD_Write_String(char *a)
+{
+	int i;
+	for(i=0;a[i]!='\0';i++)
+ 15a:	21 96       	adiw	r28, 0x01	; 1
+ 15c:	f8 01       	movw	r30, r16
+ 15e:	ec 0f       	add	r30, r28
+ 160:	fd 1f       	adc	r31, r29
+ 162:	80 81       	ld	r24, Z
+ 164:	81 11       	cpse	r24, r1
+ 166:	f7 cf       	rjmp	.-18     	; 0x156 <LCD_Write_String+0x10>
+	{
+		char big = a[i];
+		LCD_write(big);
+	}
+ 168:	df 91       	pop	r29
+ 16a:	cf 91       	pop	r28
+ 16c:	1f 91       	pop	r17
+ 16e:	0f 91       	pop	r16
+ 170:	08 95       	ret
+
+00000172 <lcd>:
+	return 0;
+}
+
+void lcd()
+{
+	DDRB=0xFF; // set LCD data port as output
+ 172:	8f ef       	ldi	r24, 0xFF	; 255
+ 174:	87 bb       	out	0x17, r24	; 23
+	DDRD=0xE0; // set LCD signals (RS, RW, E) as out put
+ 176:	80 ee       	ldi	r24, 0xE0	; 224
+ 178:	81 bb       	out	0x11, r24	; 17
+	init_LCD(); // initialize LCD
+ 17a:	0e 94 75 00 	call	0xea	; 0xea <init_LCD>
+ 17e:	8f e3       	ldi	r24, 0x3F	; 63
+ 180:	9c e9       	ldi	r25, 0x9C	; 156
+ 182:	01 97       	sbiw	r24, 0x01	; 1
+ 184:	f1 f7       	brne	.-4      	; 0x182 <lcd+0x10>
+ 186:	00 c0       	rjmp	.+0      	; 0x188 <lcd+0x16>
+ 188:	00 00       	nop
+	_delay_ms(10); // delay of 100 Milli seconds
+	LCD_cmd(0x0C); // display on, cursor off
+ 18a:	8c e0       	ldi	r24, 0x0C	; 12
+ 18c:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 190:	8f e3       	ldi	r24, 0x3F	; 63
+ 192:	9c e9       	ldi	r25, 0x9C	; 156
+ 194:	01 97       	sbiw	r24, 0x01	; 1
+ 196:	f1 f7       	brne	.-4      	; 0x194 <lcd+0x22>
+ 198:	00 c0       	rjmp	.+0      	; 0x19a <lcd+0x28>
+ 19a:	00 00       	nop
+	_delay_ms(10);
+	
+	LCD_Write_String("Show Your");
+ 19c:	84 e9       	ldi	r24, 0x94	; 148
+ 19e:	90 e0       	ldi	r25, 0x00	; 0
+ 1a0:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 1a4:	9f ef       	ldi	r25, 0xFF	; 255
+ 1a6:	20 e7       	ldi	r18, 0x70	; 112
+ 1a8:	82 e0       	ldi	r24, 0x02	; 2
+ 1aa:	91 50       	subi	r25, 0x01	; 1
+ 1ac:	20 40       	sbci	r18, 0x00	; 0
+ 1ae:	80 40       	sbci	r24, 0x00	; 0
+ 1b0:	e1 f7       	brne	.-8      	; 0x1aa <lcd+0x38>
+ 1b2:	00 c0       	rjmp	.+0      	; 0x1b4 <lcd+0x42>
+ 1b4:	00 00       	nop
+	_delay_ms(50);
+	LCD_cmd(0xC0); // move cursor to the start of 2nd line
+ 1b6:	80 ec       	ldi	r24, 0xC0	; 192
+ 1b8:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 1bc:	9f ef       	ldi	r25, 0xFF	; 255
+ 1be:	21 ee       	ldi	r18, 0xE1	; 225
+ 1c0:	84 e0       	ldi	r24, 0x04	; 4
+ 1c2:	91 50       	subi	r25, 0x01	; 1
+ 1c4:	20 40       	sbci	r18, 0x00	; 0
+ 1c6:	80 40       	sbci	r24, 0x00	; 0
+ 1c8:	e1 f7       	brne	.-8      	; 0x1c2 <lcd+0x50>
+ 1ca:	00 c0       	rjmp	.+0      	; 0x1cc <lcd+0x5a>
+ 1cc:	00 00       	nop
+	_delay_ms(100);
+	LCD_Write_String("RFID Card");
+ 1ce:	8e e9       	ldi	r24, 0x9E	; 158
+ 1d0:	90 e0       	ldi	r25, 0x00	; 0
+ 1d2:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 1d6:	08 95       	ret
+
+000001d8 <rfid_chk>:
+	
+
+}
+
+void rfid_chk()
+{
+ 1d8:	cf 93       	push	r28
+ 1da:	df 93       	push	r29
+ 1dc:	cd b7       	in	r28, 0x3d	; 61
+ 1de:	de b7       	in	r29, 0x3e	; 62
+ 1e0:	e0 97       	sbiw	r28, 0x30	; 48
+ 1e2:	0f b6       	in	r0, 0x3f	; 63
+ 1e4:	f8 94       	cli
+ 1e6:	de bf       	out	0x3e, r29	; 62
+ 1e8:	0f be       	out	0x3f, r0	; 63
+ 1ea:	cd bf       	out	0x3d, r28	; 61
+	unsigned char s1,s2,s3,s4,id[12];
+	unsigned char a[12]="13006F6B5391";
+ 1ec:	8c e0       	ldi	r24, 0x0C	; 12
+ 1ee:	e0 e6       	ldi	r30, 0x60	; 96
+ 1f0:	f0 e0       	ldi	r31, 0x00	; 0
+ 1f2:	de 01       	movw	r26, r28
+ 1f4:	11 96       	adiw	r26, 0x01	; 1
+ 1f6:	01 90       	ld	r0, Z+
+ 1f8:	0d 92       	st	X+, r0
+ 1fa:	8a 95       	dec	r24
+ 1fc:	e1 f7       	brne	.-8      	; 0x1f6 <rfid_chk+0x1e>
+	unsigned char b[12]="13006FA337F5";
+ 1fe:	8c e0       	ldi	r24, 0x0C	; 12
+ 200:	ed e6       	ldi	r30, 0x6D	; 109
+ 202:	f0 e0       	ldi	r31, 0x00	; 0
+ 204:	de 01       	movw	r26, r28
+ 206:	1d 96       	adiw	r26, 0x0d	; 13
+ 208:	01 90       	ld	r0, Z+
+ 20a:	0d 92       	st	X+, r0
+ 20c:	8a 95       	dec	r24
+ 20e:	e1 f7       	brne	.-8      	; 0x208 <rfid_chk+0x30>
+	unsigned char c[12]="13006F4B6773";
+ 210:	8c e0       	ldi	r24, 0x0C	; 12
+ 212:	ea e7       	ldi	r30, 0x7A	; 122
+ 214:	f0 e0       	ldi	r31, 0x00	; 0
+ 216:	de 01       	movw	r26, r28
+ 218:	59 96       	adiw	r26, 0x19	; 25
+ 21a:	01 90       	ld	r0, Z+
+ 21c:	0d 92       	st	X+, r0
+ 21e:	8a 95       	dec	r24
+ 220:	e1 f7       	brne	.-8      	; 0x21a <rfid_chk+0x42>
+	unsigned char d[12]="13006FC351A2";
+ 222:	8c e0       	ldi	r24, 0x0C	; 12
+ 224:	e7 e8       	ldi	r30, 0x87	; 135
+ 226:	f0 e0       	ldi	r31, 0x00	; 0
+ 228:	de 01       	movw	r26, r28
+ 22a:	95 96       	adiw	r26, 0x25	; 37
+ 22c:	01 90       	ld	r0, Z+
+ 22e:	0d 92       	st	X+, r0
+ 230:	8a 95       	dec	r24
+ 232:	e1 f7       	brne	.-8      	; 0x22c <rfid_chk+0x54>
+	uart_init();
+ 234:	0e 94 41 00 	call	0x82	; 0x82 <uart_init>
+ 238:	2f ef       	ldi	r18, 0xFF	; 255
+ 23a:	81 ee       	ldi	r24, 0xE1	; 225
+ 23c:	94 e0       	ldi	r25, 0x04	; 4
+ 23e:	21 50       	subi	r18, 0x01	; 1
+ 240:	80 40       	sbci	r24, 0x00	; 0
+ 242:	90 40       	sbci	r25, 0x00	; 0
+ 244:	e1 f7       	brne	.-8      	; 0x23e <rfid_chk+0x66>
+ 246:	00 c0       	rjmp	.+0      	; 0x248 <rfid_chk+0x70>
+ 248:	00 00       	nop
+	{
+		s1=0;
+		s2=0;
+		s3=0;
+		s4=0;
+		for(int i=0;i<12;i++) // reading RFID tag number
+ 24a:	00 e0       	ldi	r16, 0x00	; 0
+ 24c:	10 e0       	ldi	r17, 0x00	; 0
+	while(1)
+	{
+		s1=0;
+		s2=0;
+		s3=0;
+		s4=0;
+ 24e:	c1 2c       	mov	r12, r1
+	
+	while(1)
+	{
+		s1=0;
+		s2=0;
+		s3=0;
+ 250:	d1 2c       	mov	r13, r1
+	_delay_ms(100);
+	
+	while(1)
+	{
+		s1=0;
+		s2=0;
+ 252:	e1 2c       	mov	r14, r1
+	uart_init();
+	_delay_ms(100);
+	
+	while(1)
+	{
+		s1=0;
+ 254:	f1 2c       	mov	r15, r1
+		s2=0;
+		s3=0;
+		s4=0;
+		for(int i=0;i<12;i++) // reading RFID tag number
+ 256:	2c c0       	rjmp	.+88     	; 0x2b0 <rfid_chk+0xd8>
+		{
+			id[i]=rx_data();
+ 258:	0e 94 48 00 	call	0x90	; 0x90 <rx_data>
+			if(a[i]==id[i])
+ 25c:	e1 e0       	ldi	r30, 0x01	; 1
+ 25e:	f0 e0       	ldi	r31, 0x00	; 0
+ 260:	ec 0f       	add	r30, r28
+ 262:	fd 1f       	adc	r31, r29
+ 264:	e0 0f       	add	r30, r16
+ 266:	f1 1f       	adc	r31, r17
+ 268:	90 81       	ld	r25, Z
+ 26a:	89 13       	cpse	r24, r25
+ 26c:	01 c0       	rjmp	.+2      	; 0x270 <rfid_chk+0x98>
+			s1++;
+ 26e:	f3 94       	inc	r15
+			if(b[i]==id[i])
+ 270:	ed e0       	ldi	r30, 0x0D	; 13
+ 272:	f0 e0       	ldi	r31, 0x00	; 0
+ 274:	ec 0f       	add	r30, r28
+ 276:	fd 1f       	adc	r31, r29
+ 278:	e0 0f       	add	r30, r16
+ 27a:	f1 1f       	adc	r31, r17
+ 27c:	90 81       	ld	r25, Z
+ 27e:	89 13       	cpse	r24, r25
+ 280:	01 c0       	rjmp	.+2      	; 0x284 <rfid_chk+0xac>
+			s2++;
+ 282:	e3 94       	inc	r14
+			if(c[i]==id[i])
+ 284:	e9 e1       	ldi	r30, 0x19	; 25
+ 286:	f0 e0       	ldi	r31, 0x00	; 0
+ 288:	ec 0f       	add	r30, r28
+ 28a:	fd 1f       	adc	r31, r29
+ 28c:	e0 0f       	add	r30, r16
+ 28e:	f1 1f       	adc	r31, r17
+ 290:	90 81       	ld	r25, Z
+ 292:	89 13       	cpse	r24, r25
+ 294:	01 c0       	rjmp	.+2      	; 0x298 <rfid_chk+0xc0>
+			s3++;
+ 296:	d3 94       	inc	r13
+			if(d[i]==id[i])
+ 298:	e5 e2       	ldi	r30, 0x25	; 37
+ 29a:	f0 e0       	ldi	r31, 0x00	; 0
+ 29c:	ec 0f       	add	r30, r28
+ 29e:	fd 1f       	adc	r31, r29
+ 2a0:	e0 0f       	add	r30, r16
+ 2a2:	f1 1f       	adc	r31, r17
+ 2a4:	90 81       	ld	r25, Z
+ 2a6:	89 13       	cpse	r24, r25
+ 2a8:	01 c0       	rjmp	.+2      	; 0x2ac <rfid_chk+0xd4>
+			s4++;
+ 2aa:	c3 94       	inc	r12
+	{
+		s1=0;
+		s2=0;
+		s3=0;
+		s4=0;
+		for(int i=0;i<12;i++) // reading RFID tag number
+ 2ac:	0f 5f       	subi	r16, 0xFF	; 255
+ 2ae:	1f 4f       	sbci	r17, 0xFF	; 255
+ 2b0:	0c 30       	cpi	r16, 0x0C	; 12
+ 2b2:	11 05       	cpc	r17, r1
+ 2b4:	8c f2       	brlt	.-94     	; 0x258 <rfid_chk+0x80>
+			s3++;
+			if(d[i]==id[i])
+			s4++;
+		}
+		
+		if(s1==12)		// check for authentication
+ 2b6:	2c e0       	ldi	r18, 0x0C	; 12
+ 2b8:	f2 12       	cpse	r15, r18
+ 2ba:	39 c0       	rjmp	.+114    	; 0x32e <rfid_chk+0x156>
+		{
+			
+			LCD_cmd(0x01);
+ 2bc:	81 e0       	ldi	r24, 0x01	; 1
+ 2be:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 2c2:	8f e9       	ldi	r24, 0x9F	; 159
+ 2c4:	9f e0       	ldi	r25, 0x0F	; 15
+ 2c6:	01 97       	sbiw	r24, 0x01	; 1
+ 2c8:	f1 f7       	brne	.-4      	; 0x2c6 <rfid_chk+0xee>
+ 2ca:	00 c0       	rjmp	.+0      	; 0x2cc <rfid_chk+0xf4>
+ 2cc:	00 00       	nop
+			_delay_ms(1);
+			LCD_Write_String("Student 1");
+ 2ce:	88 ea       	ldi	r24, 0xA8	; 168
+ 2d0:	90 e0       	ldi	r25, 0x00	; 0
+ 2d2:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 2d6:	9f ef       	ldi	r25, 0xFF	; 255
+ 2d8:	20 e7       	ldi	r18, 0x70	; 112
+ 2da:	82 e0       	ldi	r24, 0x02	; 2
+ 2dc:	91 50       	subi	r25, 0x01	; 1
+ 2de:	20 40       	sbci	r18, 0x00	; 0
+ 2e0:	80 40       	sbci	r24, 0x00	; 0
+ 2e2:	e1 f7       	brne	.-8      	; 0x2dc <rfid_chk+0x104>
+ 2e4:	00 c0       	rjmp	.+0      	; 0x2e6 <rfid_chk+0x10e>
+ 2e6:	00 00       	nop
+			_delay_ms(50);
+			LCD_cmd(0xC0); // move cursor to the start of 2nd line
+ 2e8:	80 ec       	ldi	r24, 0xC0	; 192
+ 2ea:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 2ee:	9f ef       	ldi	r25, 0xFF	; 255
+ 2f0:	21 ee       	ldi	r18, 0xE1	; 225
+ 2f2:	84 e0       	ldi	r24, 0x04	; 4
+ 2f4:	91 50       	subi	r25, 0x01	; 1
+ 2f6:	20 40       	sbci	r18, 0x00	; 0
+ 2f8:	80 40       	sbci	r24, 0x00	; 0
+ 2fa:	e1 f7       	brne	.-8      	; 0x2f4 <rfid_chk+0x11c>
+ 2fc:	00 c0       	rjmp	.+0      	; 0x2fe <rfid_chk+0x126>
+ 2fe:	00 00       	nop
+			_delay_ms(100);
+			LCD_Write_String("Attendance Done");
+ 300:	82 eb       	ldi	r24, 0xB2	; 178
+ 302:	90 e0       	ldi	r25, 0x00	; 0
+ 304:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 308:	9f ef       	ldi	r25, 0xFF	; 255
+ 30a:	23 e2       	ldi	r18, 0x23	; 35
+ 30c:	84 ef       	ldi	r24, 0xF4	; 244
+ 30e:	91 50       	subi	r25, 0x01	; 1
+ 310:	20 40       	sbci	r18, 0x00	; 0
+ 312:	80 40       	sbci	r24, 0x00	; 0
+ 314:	e1 f7       	brne	.-8      	; 0x30e <rfid_chk+0x136>
+ 316:	00 c0       	rjmp	.+0      	; 0x318 <rfid_chk+0x140>
+ 318:	00 00       	nop
+			_delay_ms(5000);
+			LCD_cmd(0x01); // make display ON, cursor ON
+ 31a:	81 e0       	ldi	r24, 0x01	; 1
+ 31c:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 320:	8f e9       	ldi	r24, 0x9F	; 159
+ 322:	9f e0       	ldi	r25, 0x0F	; 15
+ 324:	01 97       	sbiw	r24, 0x01	; 1
+ 326:	f1 f7       	brne	.-4      	; 0x324 <rfid_chk+0x14c>
+ 328:	00 c0       	rjmp	.+0      	; 0x32a <rfid_chk+0x152>
+ 32a:	00 00       	nop
+ 32c:	8e cf       	rjmp	.-228    	; 0x24a <rfid_chk+0x72>
+			_delay_ms(1);
+		}
+		else if(s2==12)		// check for authentication
+ 32e:	9c e0       	ldi	r25, 0x0C	; 12
+ 330:	e9 12       	cpse	r14, r25
+ 332:	39 c0       	rjmp	.+114    	; 0x3a6 <rfid_chk+0x1ce>
+		{
+			LCD_cmd(0x01);
+ 334:	81 e0       	ldi	r24, 0x01	; 1
+ 336:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 33a:	8f e9       	ldi	r24, 0x9F	; 159
+ 33c:	9f e0       	ldi	r25, 0x0F	; 15
+ 33e:	01 97       	sbiw	r24, 0x01	; 1
+ 340:	f1 f7       	brne	.-4      	; 0x33e <rfid_chk+0x166>
+ 342:	00 c0       	rjmp	.+0      	; 0x344 <rfid_chk+0x16c>
+ 344:	00 00       	nop
+			_delay_ms(1);
+			LCD_Write_String("Student 2");
+ 346:	82 ec       	ldi	r24, 0xC2	; 194
+ 348:	90 e0       	ldi	r25, 0x00	; 0
+ 34a:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 34e:	9f ef       	ldi	r25, 0xFF	; 255
+ 350:	20 e7       	ldi	r18, 0x70	; 112
+ 352:	82 e0       	ldi	r24, 0x02	; 2
+ 354:	91 50       	subi	r25, 0x01	; 1
+ 356:	20 40       	sbci	r18, 0x00	; 0
+ 358:	80 40       	sbci	r24, 0x00	; 0
+ 35a:	e1 f7       	brne	.-8      	; 0x354 <rfid_chk+0x17c>
+ 35c:	00 c0       	rjmp	.+0      	; 0x35e <rfid_chk+0x186>
+ 35e:	00 00       	nop
+			_delay_ms(50);
+			LCD_cmd(0xC0); // move cursor to the start of 2nd line
+ 360:	80 ec       	ldi	r24, 0xC0	; 192
+ 362:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 366:	9f ef       	ldi	r25, 0xFF	; 255
+ 368:	21 ee       	ldi	r18, 0xE1	; 225
+ 36a:	84 e0       	ldi	r24, 0x04	; 4
+ 36c:	91 50       	subi	r25, 0x01	; 1
+ 36e:	20 40       	sbci	r18, 0x00	; 0
+ 370:	80 40       	sbci	r24, 0x00	; 0
+ 372:	e1 f7       	brne	.-8      	; 0x36c <rfid_chk+0x194>
+ 374:	00 c0       	rjmp	.+0      	; 0x376 <rfid_chk+0x19e>
+ 376:	00 00       	nop
+			_delay_ms(100);
+			LCD_Write_String("Attendance Done");
+ 378:	82 eb       	ldi	r24, 0xB2	; 178
+ 37a:	90 e0       	ldi	r25, 0x00	; 0
+ 37c:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 380:	9f ef       	ldi	r25, 0xFF	; 255
+ 382:	23 e2       	ldi	r18, 0x23	; 35
+ 384:	84 ef       	ldi	r24, 0xF4	; 244
+ 386:	91 50       	subi	r25, 0x01	; 1
+ 388:	20 40       	sbci	r18, 0x00	; 0
+ 38a:	80 40       	sbci	r24, 0x00	; 0
+ 38c:	e1 f7       	brne	.-8      	; 0x386 <rfid_chk+0x1ae>
+ 38e:	00 c0       	rjmp	.+0      	; 0x390 <rfid_chk+0x1b8>
+ 390:	00 00       	nop
+			_delay_ms(5000);
+			LCD_cmd(0x01); // make display ON, cursor ON
+ 392:	81 e0       	ldi	r24, 0x01	; 1
+ 394:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 398:	8f e9       	ldi	r24, 0x9F	; 159
+ 39a:	9f e0       	ldi	r25, 0x0F	; 15
+ 39c:	01 97       	sbiw	r24, 0x01	; 1
+ 39e:	f1 f7       	brne	.-4      	; 0x39c <rfid_chk+0x1c4>
+ 3a0:	00 c0       	rjmp	.+0      	; 0x3a2 <rfid_chk+0x1ca>
+ 3a2:	00 00       	nop
+ 3a4:	52 cf       	rjmp	.-348    	; 0x24a <rfid_chk+0x72>
+			_delay_ms(1);
+		}
+		else if(s3==12)		// check for authentication
+ 3a6:	9c e0       	ldi	r25, 0x0C	; 12
+ 3a8:	d9 12       	cpse	r13, r25
+ 3aa:	39 c0       	rjmp	.+114    	; 0x41e <__EEPROM_REGION_LENGTH__+0x1e>
+		{
+			LCD_cmd(0x01);
+ 3ac:	81 e0       	ldi	r24, 0x01	; 1
+ 3ae:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 3b2:	8f e9       	ldi	r24, 0x9F	; 159
+ 3b4:	9f e0       	ldi	r25, 0x0F	; 15
+ 3b6:	01 97       	sbiw	r24, 0x01	; 1
+ 3b8:	f1 f7       	brne	.-4      	; 0x3b6 <rfid_chk+0x1de>
+ 3ba:	00 c0       	rjmp	.+0      	; 0x3bc <rfid_chk+0x1e4>
+ 3bc:	00 00       	nop
+			_delay_ms(1);
+			LCD_Write_String("Student 3");
+ 3be:	8c ec       	ldi	r24, 0xCC	; 204
+ 3c0:	90 e0       	ldi	r25, 0x00	; 0
+ 3c2:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 3c6:	9f ef       	ldi	r25, 0xFF	; 255
+ 3c8:	20 e7       	ldi	r18, 0x70	; 112
+ 3ca:	82 e0       	ldi	r24, 0x02	; 2
+ 3cc:	91 50       	subi	r25, 0x01	; 1
+ 3ce:	20 40       	sbci	r18, 0x00	; 0
+ 3d0:	80 40       	sbci	r24, 0x00	; 0
+ 3d2:	e1 f7       	brne	.-8      	; 0x3cc <rfid_chk+0x1f4>
+ 3d4:	00 c0       	rjmp	.+0      	; 0x3d6 <rfid_chk+0x1fe>
+ 3d6:	00 00       	nop
+			_delay_ms(50);
+			LCD_cmd(0xC0); // move cursor to the start of 2nd line
+ 3d8:	80 ec       	ldi	r24, 0xC0	; 192
+ 3da:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 3de:	9f ef       	ldi	r25, 0xFF	; 255
+ 3e0:	21 ee       	ldi	r18, 0xE1	; 225
+ 3e2:	84 e0       	ldi	r24, 0x04	; 4
+ 3e4:	91 50       	subi	r25, 0x01	; 1
+ 3e6:	20 40       	sbci	r18, 0x00	; 0
+ 3e8:	80 40       	sbci	r24, 0x00	; 0
+ 3ea:	e1 f7       	brne	.-8      	; 0x3e4 <rfid_chk+0x20c>
+ 3ec:	00 c0       	rjmp	.+0      	; 0x3ee <rfid_chk+0x216>
+ 3ee:	00 00       	nop
+			_delay_ms(100);
+			LCD_Write_String("Attendance Done");
+ 3f0:	82 eb       	ldi	r24, 0xB2	; 178
+ 3f2:	90 e0       	ldi	r25, 0x00	; 0
+ 3f4:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 3f8:	9f ef       	ldi	r25, 0xFF	; 255
+ 3fa:	23 e2       	ldi	r18, 0x23	; 35
+ 3fc:	84 ef       	ldi	r24, 0xF4	; 244
+ 3fe:	91 50       	subi	r25, 0x01	; 1
+ 400:	20 40       	sbci	r18, 0x00	; 0
+ 402:	80 40       	sbci	r24, 0x00	; 0
+ 404:	e1 f7       	brne	.-8      	; 0x3fe <rfid_chk+0x226>
+ 406:	00 c0       	rjmp	.+0      	; 0x408 <__EEPROM_REGION_LENGTH__+0x8>
+ 408:	00 00       	nop
+			_delay_ms(5000);
+			LCD_cmd(0x01); // make display ON, cursor ON
+ 40a:	81 e0       	ldi	r24, 0x01	; 1
+ 40c:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 410:	8f e9       	ldi	r24, 0x9F	; 159
+ 412:	9f e0       	ldi	r25, 0x0F	; 15
+ 414:	01 97       	sbiw	r24, 0x01	; 1
+ 416:	f1 f7       	brne	.-4      	; 0x414 <__EEPROM_REGION_LENGTH__+0x14>
+ 418:	00 c0       	rjmp	.+0      	; 0x41a <__EEPROM_REGION_LENGTH__+0x1a>
+ 41a:	00 00       	nop
+ 41c:	16 cf       	rjmp	.-468    	; 0x24a <rfid_chk+0x72>
+			_delay_ms(1);
+		}
+		else if(s4==12)		// check for authentication
+ 41e:	9c e0       	ldi	r25, 0x0C	; 12
+ 420:	c9 12       	cpse	r12, r25
+ 422:	39 c0       	rjmp	.+114    	; 0x496 <__EEPROM_REGION_LENGTH__+0x96>
+		{
+			LCD_cmd(0x01);
+ 424:	81 e0       	ldi	r24, 0x01	; 1
+ 426:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 42a:	8f e9       	ldi	r24, 0x9F	; 159
+ 42c:	9f e0       	ldi	r25, 0x0F	; 15
+ 42e:	01 97       	sbiw	r24, 0x01	; 1
+ 430:	f1 f7       	brne	.-4      	; 0x42e <__EEPROM_REGION_LENGTH__+0x2e>
+ 432:	00 c0       	rjmp	.+0      	; 0x434 <__EEPROM_REGION_LENGTH__+0x34>
+ 434:	00 00       	nop
+			_delay_ms(1);
+			LCD_Write_String("Student 4");
+ 436:	86 ed       	ldi	r24, 0xD6	; 214
+ 438:	90 e0       	ldi	r25, 0x00	; 0
+ 43a:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 43e:	9f ef       	ldi	r25, 0xFF	; 255
+ 440:	20 e7       	ldi	r18, 0x70	; 112
+ 442:	82 e0       	ldi	r24, 0x02	; 2
+ 444:	91 50       	subi	r25, 0x01	; 1
+ 446:	20 40       	sbci	r18, 0x00	; 0
+ 448:	80 40       	sbci	r24, 0x00	; 0
+ 44a:	e1 f7       	brne	.-8      	; 0x444 <__EEPROM_REGION_LENGTH__+0x44>
+ 44c:	00 c0       	rjmp	.+0      	; 0x44e <__EEPROM_REGION_LENGTH__+0x4e>
+ 44e:	00 00       	nop
+			_delay_ms(50);
+			LCD_cmd(0xC0); // move cursor to the start of 2nd line
+ 450:	80 ec       	ldi	r24, 0xC0	; 192
+ 452:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 456:	9f ef       	ldi	r25, 0xFF	; 255
+ 458:	21 ee       	ldi	r18, 0xE1	; 225
+ 45a:	84 e0       	ldi	r24, 0x04	; 4
+ 45c:	91 50       	subi	r25, 0x01	; 1
+ 45e:	20 40       	sbci	r18, 0x00	; 0
+ 460:	80 40       	sbci	r24, 0x00	; 0
+ 462:	e1 f7       	brne	.-8      	; 0x45c <__EEPROM_REGION_LENGTH__+0x5c>
+ 464:	00 c0       	rjmp	.+0      	; 0x466 <__EEPROM_REGION_LENGTH__+0x66>
+ 466:	00 00       	nop
+			_delay_ms(100);
+			LCD_Write_String("Attendance Done");
+ 468:	82 eb       	ldi	r24, 0xB2	; 178
+ 46a:	90 e0       	ldi	r25, 0x00	; 0
+ 46c:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 470:	9f ef       	ldi	r25, 0xFF	; 255
+ 472:	23 e2       	ldi	r18, 0x23	; 35
+ 474:	84 ef       	ldi	r24, 0xF4	; 244
+ 476:	91 50       	subi	r25, 0x01	; 1
+ 478:	20 40       	sbci	r18, 0x00	; 0
+ 47a:	80 40       	sbci	r24, 0x00	; 0
+ 47c:	e1 f7       	brne	.-8      	; 0x476 <__EEPROM_REGION_LENGTH__+0x76>
+ 47e:	00 c0       	rjmp	.+0      	; 0x480 <__EEPROM_REGION_LENGTH__+0x80>
+ 480:	00 00       	nop
+			_delay_ms(5000);
+			LCD_cmd(0x01); // make display ON, cursor ON
+ 482:	81 e0       	ldi	r24, 0x01	; 1
+ 484:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 488:	8f e9       	ldi	r24, 0x9F	; 159
+ 48a:	9f e0       	ldi	r25, 0x0F	; 15
+ 48c:	01 97       	sbiw	r24, 0x01	; 1
+ 48e:	f1 f7       	brne	.-4      	; 0x48c <__EEPROM_REGION_LENGTH__+0x8c>
+ 490:	00 c0       	rjmp	.+0      	; 0x492 <__EEPROM_REGION_LENGTH__+0x92>
+ 492:	00 00       	nop
+ 494:	da ce       	rjmp	.-588    	; 0x24a <rfid_chk+0x72>
+			_delay_ms(1);
+		}
+		else               // unauthorized person
+		{
+			LCD_cmd(0x01);
+ 496:	81 e0       	ldi	r24, 0x01	; 1
+ 498:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 49c:	8f e9       	ldi	r24, 0x9F	; 159
+ 49e:	9f e0       	ldi	r25, 0x0F	; 15
+ 4a0:	01 97       	sbiw	r24, 0x01	; 1
+ 4a2:	f1 f7       	brne	.-4      	; 0x4a0 <__EEPROM_REGION_LENGTH__+0xa0>
+ 4a4:	00 c0       	rjmp	.+0      	; 0x4a6 <__EEPROM_REGION_LENGTH__+0xa6>
+ 4a6:	00 00       	nop
+			_delay_ms(1);
+			LCD_Write_String("Unidentified");
+ 4a8:	80 ee       	ldi	r24, 0xE0	; 224
+ 4aa:	90 e0       	ldi	r25, 0x00	; 0
+ 4ac:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 4b0:	9f ef       	ldi	r25, 0xFF	; 255
+ 4b2:	20 e7       	ldi	r18, 0x70	; 112
+ 4b4:	82 e0       	ldi	r24, 0x02	; 2
+ 4b6:	91 50       	subi	r25, 0x01	; 1
+ 4b8:	20 40       	sbci	r18, 0x00	; 0
+ 4ba:	80 40       	sbci	r24, 0x00	; 0
+ 4bc:	e1 f7       	brne	.-8      	; 0x4b6 <__EEPROM_REGION_LENGTH__+0xb6>
+ 4be:	00 c0       	rjmp	.+0      	; 0x4c0 <__EEPROM_REGION_LENGTH__+0xc0>
+ 4c0:	00 00       	nop
+			_delay_ms(50);
+			LCD_cmd(0xC0); // move cursor to the start of 2nd line
+ 4c2:	80 ec       	ldi	r24, 0xC0	; 192
+ 4c4:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 4c8:	9f ef       	ldi	r25, 0xFF	; 255
+ 4ca:	21 ee       	ldi	r18, 0xE1	; 225
+ 4cc:	84 e0       	ldi	r24, 0x04	; 4
+ 4ce:	91 50       	subi	r25, 0x01	; 1
+ 4d0:	20 40       	sbci	r18, 0x00	; 0
+ 4d2:	80 40       	sbci	r24, 0x00	; 0
+ 4d4:	e1 f7       	brne	.-8      	; 0x4ce <__EEPROM_REGION_LENGTH__+0xce>
+ 4d6:	00 c0       	rjmp	.+0      	; 0x4d8 <__EEPROM_REGION_LENGTH__+0xd8>
+ 4d8:	00 00       	nop
+			_delay_ms(100);
+			LCD_Write_String("RFID Card");
+ 4da:	8e e9       	ldi	r24, 0x9E	; 158
+ 4dc:	90 e0       	ldi	r25, 0x00	; 0
+ 4de:	0e 94 a3 00 	call	0x146	; 0x146 <LCD_Write_String>
+ 4e2:	9f ef       	ldi	r25, 0xFF	; 255
+ 4e4:	23 e2       	ldi	r18, 0x23	; 35
+ 4e6:	84 ef       	ldi	r24, 0xF4	; 244
+ 4e8:	91 50       	subi	r25, 0x01	; 1
+ 4ea:	20 40       	sbci	r18, 0x00	; 0
+ 4ec:	80 40       	sbci	r24, 0x00	; 0
+ 4ee:	e1 f7       	brne	.-8      	; 0x4e8 <__EEPROM_REGION_LENGTH__+0xe8>
+ 4f0:	00 c0       	rjmp	.+0      	; 0x4f2 <__EEPROM_REGION_LENGTH__+0xf2>
+ 4f2:	00 00       	nop
+			_delay_ms(5000);
+			LCD_cmd(0x01); // make display ON, cursor ON
+ 4f4:	81 e0       	ldi	r24, 0x01	; 1
+ 4f6:	0e 94 4d 00 	call	0x9a	; 0x9a <LCD_cmd>
+ 4fa:	8f e9       	ldi	r24, 0x9F	; 159
+ 4fc:	9f e0       	ldi	r25, 0x0F	; 15
+ 4fe:	01 97       	sbiw	r24, 0x01	; 1
+ 500:	f1 f7       	brne	.-4      	; 0x4fe <__EEPROM_REGION_LENGTH__+0xfe>
+ 502:	00 c0       	rjmp	.+0      	; 0x504 <__EEPROM_REGION_LENGTH__+0x104>
+ 504:	00 00       	nop
+ 506:	a1 ce       	rjmp	.-702    	; 0x24a <rfid_chk+0x72>
+
+00000508 <main>:
+*/
+
+
+int main()
+{
+	lcd();
+ 508:	0e 94 b9 00 	call	0x172	; 0x172 <lcd>
+	rfid_chk();
+ 50c:	0e 94 ec 00 	call	0x1d8	; 0x1d8 <rfid_chk>
+
+00000510 <_exit>:
+ 510:	f8 94       	cli
+
+00000512 <__stop_program>:
+ 512:	ff cf       	rjmp	.-2      	; 0x512 <__stop_program>
